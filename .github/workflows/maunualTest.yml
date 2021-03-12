@@ -16,3 +16,6 @@ jobs:
         with:
           build: npm run build
           start: npm start
+      - name: Post Test
+        if: failure()
+        run: echo "Fail"
