@@ -4,6 +4,7 @@ on:
 
 jobs:
   cypress-run:
+    name: cypress-run
     runs-on: ubuntu-latest
     strategy:
         fail-fast: false
@@ -17,7 +18,15 @@ jobs:
         with:
           build: npm run build
           start: npm start
+          record: true
+          parallel: true
           spec: './cypress/integration/examples/**'
-      - name: Post Test
-        if: failure()
-        run: echo "Fail"
+          
+  send-failure-alerts:
+    name: send failure alerts
+    runs-on: ubuntu-latest
+    needs: [cypress-run]
+    if: failure()
+    steps:
+      - name: handle failure
+        run: echo 'Failure 😑'
