@@ -17,7 +17,7 @@ jobs:
         with:
           build: npm run build
           start: npm start
-          record: false
+          record: true
           parallel: true
           spec: './cypress/integration/examples/**'
       - name: Post Test
